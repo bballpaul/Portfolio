@@ -3,11 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Portfolio | RocketGoUp</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <title>RocketGoUp</title>
+    <link rel="shortcut icon" href="../icon/Pizza.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <script type="text/javascript" src="RocketGoUp.js"></script>
   </head>
   <body>
+
+
+    <nav id="navBar" class="sideNav">
+      <a href="javascript:void(0)" class="navClose" onclick="closeNav()">&times;</a>
+      <a class="navText" href="../AndyUpgrade/AndyUpgrade.html">AndyUpgrade</a>
+      <a class="navText" href="../Pong/Pong.html">Pong</a>
+      <a class="navText" href="../RocketGoUp/RocketGoUp.html">RocketGoUp</a>
+
+  </nav>
+  <div class="TopBarDiv">
+      <a href="javascript:void(0)" class="navOpen" onclick="openNav()">&#9776;</a>
+      <span class="navOpenText">Projects</span>
+      <a href="../MainPage/index2.html" class="MainPageLink">Paul Lins</a>
+  </div>
+
+
+
+
+
+
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -16,15 +37,21 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div id="unity-mobile-warning">
-        WebGL builds are not supported on mobile devices.
-      </div>
+
       <div id="unity-footer">
-        <!--<div id="unity-webgl-logo"></div>
+        <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">RocketGoUp</div>-->
       </div>
     </div>
+
+
+
+
+
+
+
+
+
     <script>
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/RGUWEBGL.loader.js";
@@ -74,5 +101,19 @@
       };
       document.body.appendChild(script);
     </script>
+
+
+
+
+
+
+<div class="bottomLinks">
+  <a href="https://pizza883.itch.io/" target="_blank">Downloads</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJ7jX-QY0QAqxQK7d-I9yWggAJx_dOdjEcx29dpVUqUJdZ_g/viewform?usp=sf_link" target="_blank">Suggestions</a>
+  <a href="../Contact/Contact.html">Contact</a>
+</div>
+
+
+
   </body>
 </html>
