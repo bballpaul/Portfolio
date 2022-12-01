@@ -49,6 +49,74 @@ function AI(){
   rect(AIX, 25, 150, 25);
 }
 
+function AIMovement(){
+  
+  //do the math to find a target where the ball is predicted to end up
+  //moves 10 pixels per frame up and down
+  //ballMoveX is the left and right speed in pixels per frame
+  //canvas is 800 x 800 pixels
+  
+  //maybe find the slope, which is ballmovey/ballmovex
+  //then maybe find where it will hit the wall, and every time it will hit the wall multiply the slope by -1 to get the bounce angle
+  //and then find where it will cross where the ai paddle is
+  var target
+  var slope = ballMoveY / ballMoveX
+  var rCorner = (ballY) / (800 - ballX)
+  var lCorner = ballY / ballX
+  
+  var bounceY
+  if(ballMoveX > 0){
+    //ball is going right
+    if(rCorner > abs(slope)){
+      //its gonna bounce off the wall
+      bounceY = ((800 - ballX) / (ballMoveX)) * -10 + ballY;
+      
+      target = (bounceY / 10) * -ballMoveX + ballX;
+    }
+    else{
+      //it won't bounce
+      target = (ballY / 10) * ballMoveX + ballX;
+    }
+  } 
+  else if(ballMoveX < 0){
+    //ball is going left
+    if(lCorner > abs(slope)){
+      //its gonna bounce off the wall
+      bounceY = (ballX / -ballMoveX) * -10 + ballY;
+      
+      //if messed up, might have to leave the ballMoveX not negative
+      target = (bounceY / 10) * -ballMoveX;
+    }
+    else{
+      //it won't bounce
+      target = (ballY / 10) * ballMoveX + ballX;
+    }
+  }
+  else{
+    target = ballX;
+  }
+  
+  //in the code below, replace ballX wtih the x position of the target
+  
+  //if(ballMoveY < 0){
+  //AI movement
+  if(target < AIX + 75){
+    AIX -= AISpeed;
+  }
+  if(target > AIX + 75){
+    AIX += AISpeed;
+  }
+  
+  //so AI doesn't go half out
+  if(AIX < 0){
+    AIX  = 0;
+  }
+  if(AIX + 150 > 800){
+    AIX = 650;
+  }
+  //}
+}
+
 function ball(){
   fill(255, 255, 255);
   ellipse(ballX, ballY, 20, 20);
@@ -83,7 +151,7 @@ function draw() {
     text('Arrows to Move', 75, 170);
     text('Press any Key to Begin 1 player', 75, 220);
     text('Press 2 to start 2 player', 75, 270);
-    text('Player 2 Uses Mouse', 75, 320);
+    text('Player 2 Uses a and d', 75, 320);
   }
   if(keyIsPressed && start === 1){
     ballMoveY = 10;
@@ -141,13 +209,10 @@ function draw() {
     ballMoveX += 1;
   }
   
-//AI movement
-  if(ballX < AIX + 75 && TwoPlayer === 0){
-    AIX -= AISpeed;
+  if(TwoPlayer === 0){
+    AIMovement();
   }
-  if(ballX > AIX + 75 && TwoPlayer === 0){
-    AIX += AISpeed;
-  }
+  
   
   //player 2 movement
   if(keyIsDown(65) && TwoPlayer === 1){
@@ -157,13 +222,7 @@ function draw() {
     AIX += 5;
   }
   
-//so AI doesn't go half out
-  if(AIX < 0){
-    AIX  = 0;
-  }
-  if(AIX + 150 > 800){
-    AIX = 650;
-  }
+
   
   
 //ball bouncing off player's paddle
